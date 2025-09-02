@@ -3,16 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gelado Açaíteria</title>
+  <title>Minha Loja</title>
+  <!-- TailwindCSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind + Animate -->
+  <script src="https://unpkg.com/@tailwindcss/forms"></script>
   <style>
-    /* Animação do mascote */
+    /* Mascote animado entrando */
     @keyframes mascotEntry {
-      from {
+      0% {
         transform: translate(200px, -200px);
         opacity: 0;
       }
-      to {
+      100% {
         transform: translate(0, 0);
         opacity: 1;
       }
@@ -22,97 +25,108 @@
     }
   </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-900">
+<body class="bg-gray-50 text-gray-800">
 
-  <!-- Header -->
-  <header class="flex items-center justify-between px-4 py-3 bg-white shadow-md fixed top-0 w-full z-50">
-    <!-- Logo -->
-    <div class="relative group">
-      <img src="sua-logo.png" alt="Logo" class="h-12 cursor-pointer">
+  <!-- HEADER -->
+  <header class="flex items-center justify-between p-4 bg-white shadow-md">
+    <!-- Logo + Menu -->
+    <div class="flex items-center space-x-4">
+      <button id="logoBtn" class="font-bold text-lg">🍔 Minha Loja</button>
       <!-- Dropdown -->
-      <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-lg mt-2 p-2">
-        <a href="#login" class="block px-4 py-2 hover:bg-gray-100">Login</a>
-        <a href="#pedidos" class="block px-4 py-2 hover:bg-gray-100">Meus Pedidos</a>
-        <a href="#menu" class="block px-4 py-2 hover:bg-gray-100">Menu</a>
+      <div id="menuDropdown" class="hidden absolute mt-12 bg-white border rounded shadow-lg">
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Login</a>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Meus Pedidos</a>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Menu</a>
       </div>
     </div>
 
     <!-- Localização + Busca -->
-    <div class="flex items-center gap-4">
-      <div class="text-sm text-gray-600">📍 Campos dos Goytacazes</div>
-      <div>
-        <input type="text" placeholder="Pesquisar..."
-          class="border rounded-full px-3 py-1 text-sm focus:outline-none">
-      </div>
+    <div class="flex items-center space-x-4">
+      <span class="text-sm">📍 Campos dos Goytacazes</span>
+      <input type="text" id="searchInput" placeholder="Pesquisar..."
+        class="border rounded px-2 py-1 text-sm focus:outline-none focus:ring focus:border-blue-400">
+      <button onclick="searchSite()" class="px-2">🔍</button>
     </div>
+
+    <!-- Botão Login -->
+    <button id="loginBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Login</button>
   </header>
 
-  <!-- Banner -->
-  <section class="relative mt-20">
-    <img src="seu-banner.png" alt="Banner" class="w-full h-72 object-cover">
-    <!-- Mascote -->
-    <img src="seu-mascote.png" alt="Mascote"
-      class="absolute top-10 left-6 h-40 mascot-animate">
+  <!-- BANNER -->
+  <section class="relative w-full h-64 bg-gray-200 flex items-center justify-center">
+    <!-- Imagem do Canva -->
+    <img src="banner.png" alt="Banner" class="w-full h-full object-cover">
+    <!-- Mascote animado -->
+    <img src="mascote.png" alt="Mascote"
+      class="absolute left-10 bottom-0 w-32 mascot-animate">
   </section>
 
-  <!-- Cardápio -->
-  <section class="mt-6 px-4">
-    <img src="seu-cardapio.png" alt="Cardápio" class="w-full rounded-xl shadow-lg">
+  <!-- CARDÁPIO (imagem) -->
+  <section class="p-6">
+    <img src="cardapio.png" alt="Cardápio" class="w-full rounded-lg shadow-md">
   </section>
 
-  <!-- Carrossel de fotos -->
-  <section class="mt-8 px-4">
-    <h2 class="text-xl font-bold mb-3">Confira nossas delícias 🍨</h2>
-    <div class="overflow-x-auto">
-      <div class="flex gap-4">
-        <img src="foto1.jpg" alt="Foto 1" class="h-48 rounded-xl shadow-md flex-shrink-0">
-        <img src="foto2.jpg" alt="Foto 2" class="h-48 rounded-xl shadow-md flex-shrink-0">
-        <img src="foto3.jpg" alt="Foto 3" class="h-48 rounded-xl shadow-md flex-shrink-0">
-        <img src="foto4.jpg" alt="Foto 4" class="h-48 rounded-xl shadow-md flex-shrink-0">
-      </div>
+  <!-- CARROSSEL DE FOTOS -->
+  <section class="p-6">
+    <div class="overflow-x-auto flex space-x-4">
+      <img src="foto1.jpg" class="h-40 rounded-lg shadow-md" alt="Foto 1">
+      <img src="foto2.jpg" class="h-40 rounded-lg shadow-md" alt="Foto 2">
+      <img src="foto3.jpg" class="h-40 rounded-lg shadow-md" alt="Foto 3">
+      <img src="foto4.jpg" class="h-40 rounded-lg shadow-md" alt="Foto 4">
     </div>
   </section>
 
-  <!-- Botões -->
-  <section class="mt-8 px-4 flex flex-wrap gap-4 justify-center">
-    <button class="flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-xl shadow-md hover:bg-purple-700">
-      <img src="icone1.png" alt="Ícone" class="h-6"> Milk Shakes
+  <!-- BOTÕES -->
+  <section class="p-6 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+    <button class="flex flex-col items-center p-4 bg-white shadow rounded-lg">
+      <img src="icon1.png" class="w-10 h-10 mb-2" alt="Icon 1"> Milk Shake
     </button>
-    <button class="flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-xl shadow-md hover:bg-purple-700">
-      <img src="icone2.png" alt="Ícone" class="h-6"> Açaís
+    <button class="flex flex-col items-center p-4 bg-white shadow rounded-lg">
+      <img src="icon2.png" class="w-10 h-10 mb-2" alt="Icon 2"> Lanches
     </button>
-    <button class="flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-xl shadow-md hover:bg-purple-700">
-      <img src="icone3.png" alt="Ícone" class="h-6"> Sobremesas
+    <button class="flex flex-col items-center p-4 bg-white shadow rounded-lg">
+      <img src="icon3.png" class="w-10 h-10 mb-2" alt="Icon 3"> Açaí
+    </button>
+    <button class="flex flex-col items-center p-4 bg-white shadow rounded-lg">
+      <img src="icon4.png" class="w-10 h-10 mb-2" alt="Icon 4"> Bebidas
     </button>
   </section>
 
-  <!-- Login Modal -->
-  <div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white p-6 rounded-xl w-80">
-      <h2 class="text-lg font-bold mb-4">Login</h2>
-      <input type="text" placeholder="Nome"
-        class="w-full border px-3 py-2 rounded mb-2">
-      <input type="tel" placeholder="Telefone"
-        class="w-full border px-3 py-2 rounded mb-2">
-      <button onclick="alert('Código enviado pelo WhatsApp (simulação)')"
-        class="w-full bg-green-600 text-white py-2 rounded-lg">Verificar celular</button>
-      <button onclick="toggleLogin(false)"
-        class="w-full mt-2 text-sm text-gray-600">Cancelar</button>
+  <!-- MODAL LOGIN -->
+  <div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+      <h2 class="text-xl font-bold mb-4">Login</h2>
+      <input type="text" placeholder="Nome" class="w-full mb-2 border rounded px-2 py-1">
+      <input type="tel" placeholder="Telefone" class="w-full mb-4 border rounded px-2 py-1">
+      <button class="bg-green-600 text-white px-4 py-2 rounded w-full">Verificar celular</button>
+      <button id="closeModal" class="mt-2 w-full text-sm text-gray-500">Fechar</button>
     </div>
   </div>
 
+  <!-- Scripts -->
   <script>
-    // Modal
-    function toggleLogin(show) {
-      document.getElementById('loginModal').classList.toggle('hidden', !show);
-    }
-    // Ativa modal se clicar no link login do dropdown
-    document.querySelectorAll('a[href="#login"]').forEach(el => {
-      el.addEventListener('click', (e) => {
-        e.preventDefault();
-        toggleLogin(true);
-      });
+    // Dropdown do logo
+    const logoBtn = document.getElementById('logoBtn');
+    const menuDropdown = document.getElementById('menuDropdown');
+    logoBtn.addEventListener('click', () => {
+      menuDropdown.classList.toggle('hidden');
     });
+
+    // Modal login
+    const loginBtn = document.getElementById('loginBtn');
+    const loginModal = document.getElementById('loginModal');
+    const closeModal = document.getElementById('closeModal');
+    loginBtn.addEventListener('click', () => loginModal.classList.remove('hidden'));
+    closeModal.addEventListener('click', () => loginModal.classList.add('hidden'));
+
+    // Busca simples
+    function searchSite() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      if (query.includes("milk shake")) alert("Redirecionando para Milk Shake...");
+      else if (query.includes("açaí")) alert("Redirecionando para Açaí...");
+      else alert("Busca não encontrada!");
+    }
   </script>
+
 </body>
 </html>
