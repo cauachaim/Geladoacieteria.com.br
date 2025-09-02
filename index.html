@@ -4,11 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gelado Açaíteria</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg-1:#14061c;
@@ -17,88 +15,62 @@
       --accent-2:#b783ff;
       --text:#ffffff;
       --muted:#cbb4d6;
+      --pill:#3d1452;
       --shadow: 0 8px 30px rgba(0,0,0,.35);
       --radius:22px;
     }
-
     *{box-sizing:border-box}
-    html,body{
-      margin:0;
-      background:radial-gradient(1200px 600px at 50% -30%,#2a0c3b 0%, #14061c 55%, #0d0413 100%) fixed;
-      color:var(--text);
-      font-family:Poppins,system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif
-    }
+    html,body{margin:0;background:radial-gradient(1200px 600px at 50% -30%,#2a0c3b 0%, #14061c 55%, #0d0413 100%) fixed; color:var(--text); font-family:Poppins,system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif}
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%}
     .container{max-width:1100px;margin:0 auto;padding:14px}
 
-    /* HEADER */
+    /* Header */
     header{
-      position:relative; /* não fixo */
-      z-index:10;
-      background:rgba(13,4,19,.65);
-      backdrop-filter:blur(6px);
+      position: relative; /* removido sticky */
+      z-index: 50;
+      background: rgba(13,4,19,.65);
+      backdrop-filter: blur(6px);
       border-bottom:1px solid rgba(255,255,255,.04);
     }
     .row{display:flex;align-items:center;gap:10px}
     .space{flex:1}
 
-    .logo{display:flex;align-items:center;gap:10px;border-radius:999px;padding:6px;cursor:pointer}
+    .logo{display:flex;align-items:center;gap:10px;border-radius:999px;padding:6px;transition:.15s;cursor:pointer}
     .logo img{width:40px;height:40px;border-radius:999px}
-    .logo strong{font-size:.98rem}
+    .logo strong{font-size:0.95rem}
 
-    .loc-pill{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(180deg,#e6fbff 0%, #d6f6ff 100%);color:#09202b;padding:8px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.06);font-weight:700;box-shadow:0 6px 18px rgba(9,32,43,.06)}
+    .loc-pill{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(180deg,#e6fbff 0%, #d6f6ff 100%);color:#09202b;padding:8px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.06);font-weight:600;box-shadow:0 6px 18px rgba(9,32,43,.06)}
     .loc-pill svg{width:18px;height:18px;flex-shrink:0}
 
     .search-btn{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.05);cursor:pointer}
     .login-btn{background:#fff;color:#1d0f25;font-weight:800;border:0;border-radius:999px;padding:8px 14px;cursor:pointer}
 
-    .menu{position:absolute;top:66px;left:14px;background:var(--bg-2);border:1px solid rgba(255,255,255,.06);border-radius:12px;box-shadow:var(--shadow);overflow:hidden;display:none;min-width:220px}
-    .menu a{display:flex;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.04)}
-    .menu a:last-child{border-bottom:none}
-    .menu a:hover{background:rgba(255,255,255,.03)}
+    /* HERO / Banner */
+    .hero {position: relative;margin-top: 14px;}
+    .banner {
+      position: relative;
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .banner-img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
 
-    /* HERO */
-    .hero{position:relative;margin-top:14px}
-    .banner{
-      position:relative;
-      width:100%;
-      height:170px;
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:var(--radius);
-      overflow:hidden;
-      box-shadow:var(--shadow);
-      background:linear-gradient(120deg,#3d1452 0%, #6b2c7a 60%, #42145a 100%);
-    }
-    .banner-title{
-      position:absolute; inset:0;
-      display:flex; align-items:center; justify-content:center;
-      text-align:center; padding:0 120px;
-    }
-    .banner-title h1{
-      margin:0;
-      font-size:clamp(24px,6vw,44px);
-      font-weight:800;
-      letter-spacing:2px;
-      text-transform:uppercase;
-      text-shadow:0 6px 20px rgba(0,0,0,.35);
-    }
-    .cups{
-      position:absolute; right:14px; bottom:6px;
-      width:140px; max-width:32%;
-      filter:drop-shadow(0 10px 18px rgba(0,0,0,.35));
-    }
     .mascote{
       position:absolute;
-      left:clamp(16px,5vw,64px);
-      top:clamp(-26px,-3vh,-8px);
-      width:140px;
-      pointer-events:none;
+      bottom:0;
+      left:5%;
+      width:120px;
+      max-width:25%;
       opacity:0;
-      transform-origin:center;
-      filter:drop-shadow(0 12px 24px rgba(0,0,0,.45));
-    }
-    .mascote.flyIn{
+      pointer-events:none;
       animation: flyIn 900ms cubic-bezier(.22,.9,.32,1) .15s forwards,
                  float 3000ms ease-in-out 1s infinite alternate;
     }
@@ -108,28 +80,26 @@
     }
     @keyframes float{from{transform:translateY(0);}to{transform:translateY(-10px);}}
 
-    .info-ribbon{
-      position:absolute; left:50%; transform:translateX(-50%);
-      bottom:16px;
-      display:flex; gap:14px; justify-content:center;
-      background:rgba(0,0,0,.25);
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:18px;
-      padding:10px 14px;
-      box-shadow:var(--shadow);
-      backdrop-filter: blur(2px);
+    /* Info abaixo do banner */
+    .delivery-info{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      margin:14px 0;
+      flex-wrap:wrap;
     }
-    .chip{
-      background:rgba(0,0,0,.35);
-      border:1px solid rgba(255,255,255,.14);
-      padding:8px 12px;
-      border-radius:14px;
-      font-weight:700;
-      font-size:.88rem;
+    .delivery-info .chip{
+      background:#400a64;
+      color:#fff;
+      padding:10px 16px;
+      border-radius:18px;
+      font-size:.9rem;
+      font-weight:600;
       white-space:nowrap;
+      box-shadow:var(--shadow);
     }
 
-    /* CARDÁPIO */
+    /* Cardápio */
     .title-pill{
       margin:18px auto 6px;
       width:min(540px,92%);
@@ -137,47 +107,40 @@
       overflow:hidden;
       box-shadow:var(--shadow);
       border:1px solid rgba(255,255,255,.12);
+      background:transparent;
     }
-    .title-pill img{
-      width:100%; height:100%; object-fit:cover; display:block;
-    }
+    .title-pill img{width:100%; height:auto; display:block;}
 
-    /* CARROSSEL */
+    /* Carrossel */
     .photo-carousel{margin-top:12px;position:relative;border-radius:16px;overflow:hidden}
     .slides{display:flex;transition:transform .5s ease;will-change:transform}
     .slide{min-width:100%;flex:0 0 100%;user-select:none}
-    .slide img{width:100%;height:220px;object-fit:cover;display:block}
+    .slide img{width:100%;height:260px;object-fit:cover;display:block}
     .carousel-ctrl{position:absolute;top:50%;left:0;right:0;display:flex;justify-content:space-between;transform:translateY(-50%);padding:0 8px;pointer-events:none}
     .carousel-ctrl button{pointer-events:auto;background:rgba(0,0,0,.36);border:0;padding:8px 10px;border-radius:10px;color:#fff;cursor:pointer}
     .dots{display:flex;gap:8px;justify-content:center;padding:10px;margin-top:8px}
     .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.15);cursor:pointer}
     .dot.active{background:var(--accent-2)}
 
-    /* BADGES */
+    /* Badges */
     .badges{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
     .badge{display:flex;align-items:center;gap:8px;background:#fff;color:#2b1340;border:0;padding:10px 12px;border-radius:999px;box-shadow:var(--shadow);font-weight:800;justify-content:center}
     .badge img{width:22px;height:22px;border-radius:6px}
 
     footer{margin:50px 0 40px;color:#9b7fb6;text-align:center}
 
-    /* RESPONSIVO */
+    /* Responsivo */
     @media(max-width:900px){
       .banner{min-height:180px}
       .slide img{height:200px}
       .mascote{width:110px}
-      .cups{width:120px}
     }
     @media(max-width:720px){
       .container{padding:10px}
-      header .container{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-      .loc-pill{order:2;margin-left:6px}
-      .logo{order:1}
-      .search{order:3}
-      .login-btn{order:4}
+      header .container{flex-wrap:wrap}
       .banner{min-height:150px}
       .slide img{height:180px}
-      .mascote{left:12px;top:-22px;width:96px}
-      .cups{right:8px;width:108px}
+      .mascote{left:12px;top:auto;width:96px}
       .badge{font-size:.86rem;padding:8px}
     }
   </style>
@@ -186,44 +149,45 @@
   <header>
     <div class="container row">
       <div id="logoBtn" class="logo">
-        <img src="assets/1000056628-removebg-preview.png" alt="Logo"/>
+        <img src="assets/logo.png" alt="Logo"/>
         <strong>Gelado Açaíteria</strong>
       </div>
       <div class="loc-pill">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7z" fill="#07414f" /><circle cx="12" cy="9" r="2.2" fill="#0b4b57" /></svg>
-        <div style="font-size:.95rem">Nova Brasília | Campos dos Goytacazes</div>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7z" fill="#07414f" /><circle cx="12" cy="9" r="2.2" fill="#0b4b57" /></svg>
+        <div>Nova Brasília | Campos dos Goytacazes</div>
       </div>
       <div class="space"></div>
       <div class="search"><button id="searchOpen" class="search-btn">🔎</button></div>
       <button id="loginBtn" class="login-btn">FAZER LOGIN</button>
-      <nav id="logoMenu" class="menu">
-        <a href="#" id="openLogin">🔐 Login</a>
-        <a href="#meus-pedidos">🧾 Meus pedidos</a>
-        <a href="#cardapio">🧉 Menu</a>
-      </nav>
     </div>
   </header>
 
   <main class="container">
+    <!-- HERO -->
     <section class="hero">
       <div class="banner">
-        <div class="banner-title"><h1>Gelado<br/>Açaíteria</h1></div>
-        <img class="cups" src="assets/1000056839-removebg-preview.png" alt="Copos de açaí"/>
-        <img id="mascote" class="mascote" src="assets/1000056585-removebg-preview.png" alt="Mascote"/>
-        <div class="info-ribbon"><div class="chip">ENTREGA 40 MIN–1H E 10 MIN</div><div class="chip">SEM PEDIDO MÍNIMO</div></div>
+        <img src="assets/banner.png" alt="Banner Gelado Açaíteria" class="banner-img"/>
+        <img id="mascote" src="assets/mascote.png" alt="Mascote" class="mascote"/>
       </div>
     </section>
 
+    <!-- Info -->
+    <section class="delivery-info">
+      <div class="chip">ENTREGA 40 MIN–1H E 10 MIN</div>
+      <div class="chip">SEM PEDIDO MÍNIMO</div>
+    </section>
+
+    <!-- Cardápio -->
     <div class="title-pill" id="cardapio">
-      <img src="assets/1000056835-removebg-preview.png" alt="Cardápio"/>
+      <img src="assets/cardapio.png" alt="Cardápio"/>
     </div>
 
+    <!-- Carrossel -->
     <section class="photo-carousel">
       <div class="slides" id="slides">
         <div class="slide"><img src="assets/slide1.jpg" alt="Foto 1"/></div>
         <div class="slide"><img src="assets/slide2.jpg" alt="Foto 2"/></div>
         <div class="slide"><img src="assets/slide3.jpg" alt="Foto 3"/></div>
-        <div class="slide"><img src="assets/slide4.jpg" alt="Foto 4"/></div>
       </div>
       <div class="carousel-ctrl">
         <button id="prev">⟵</button>
@@ -232,11 +196,12 @@
       <div class="dots" id="dots"></div>
     </section>
 
+    <!-- Atalhos -->
     <section class="badges">
       <a class="badge" href="#mais-pedidos"><img src="assets/ico-mais.png"/> Mais Pedidos</a>
       <a class="badge" href="#promo"><img src="assets/ico-promo.png"/> Compre 1 e leve 2</a>
       <a class="badge" href="#monte-seu"><img src="assets/ico-monte.png"/> Monte seu açaí</a>
-      <a class="badge" href="#combos"><img src="assets/ico-combos.png"/> Combos Deliciosos</a>
+      <a class="badge" href="#combos"><img src="assets/ico-combos.png"/> Combos</a>
       <a class="badge" href="#milk-shake"><img src="assets/ico-milk.png"/> Milk shake</a>
     </section>
   </main>
@@ -250,13 +215,10 @@
     const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
     $('#year').textContent = new Date().getFullYear();
 
-    const logoBtn=$('#logoBtn'),logoMenu=$('#logoMenu');
-    const toggleMenu=s=>{logoMenu.style.display=s?'block':'none';logoBtn.setAttribute('aria-expanded',s);};
-    logoBtn.addEventListener('click',e=>{e.stopPropagation();toggleMenu(logoMenu.style.display!=='block');});
-    document.addEventListener('click',()=>toggleMenu(false));
+    // Mascote animação
+    document.getElementById('mascote').classList.add('flyIn');
 
-    const masc=document.getElementById('mascote'); masc.classList.add('flyIn');
-
+    // Carrossel
     const slides=$('#slides'),dotsWrap=$('#dots');let idx=0;const total=$$('.slide',slides).length;
     function renderDots(){dotsWrap.innerHTML='';for(let i=0;i<total;i++){const d=document.createElement('div');d.className='dot'+(i===idx?' active':'');d.dataset.i=i;d.addEventListener('click',()=>goTo(i));dotsWrap.appendChild(d);}}
     function update(){slides.style.transform=`translateX(-${idx*100}%)`;$$('.dot').forEach(d=>d.classList.remove('active'));$$('.dot')[idx]?.classList.add('active');}
