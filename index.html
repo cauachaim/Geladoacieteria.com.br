@@ -1,1 +1,376 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gelado Açaíteria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-1:#14061c; /* fundo geral */
+      --bg-2:#2a0c3b; /* blocos */
+      --accent:#7a2b8d; /* detalhes */
+      --accent-2:#b783ff; /* realces */
+      --text:#ffffff;
+      --muted:#cbb4d6;
+      --pill:#3d1452;
+      --shadow: 0 8px 30px rgba(0,0,0,.35);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:radial-gradient(1200px 600px at 50% -30%,#2a0c3b 0%, #14061c 55%, #0d0413 100%) fixed; color:var(--text); font-family:Poppins,system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    .container{max-width:1100px;margin:0 auto;padding:14px}/* Header */
+header{position:sticky;top:0;z-index:50;background:rgba(13,4,19,.75);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+.row{display:flex;align-items:center;gap:10px}
+.space{flex:1}
+.logo{display:flex;align-items:center;gap:10px;border-radius:999px;padding:8px 12px;transition:.2s;cursor:pointer}
+.logo:hover{background:rgba(255,255,255,.06)}
+.logo img{width:38px;height:38px;border-radius:999px}
 
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--pill);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.08);font-weight:500;box-shadow:var(--shadow)}
+.search{position:relative}
+.search input{width:220px;background:var(--pill);border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:10px 36px 10px 14px;color:var(--text)}
+.search button{position:absolute;right:4px;top:4px;border:0;background:transparent;color:var(--text);padding:6px;border-radius:999px;cursor:pointer}
+
+.login-btn{background:#fff;color:#1d0f25;font-weight:700;border:0;border-radius:999px;padding:10px 14px;cursor:pointer}
+
+/* Dropdown no logo */
+.menu{position:absolute;top:60px;left:14px;background:var(--bg-2);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;display:none;min-width:220px}
+.menu a{display:flex;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.06)}
+.menu a:last-child{border-bottom:none}
+.menu a:hover{background:rgba(255,255,255,.06)}
+
+/* Hero / Banner */
+.hero{position:relative;margin-top:14px}
+.banner{background:linear-gradient(120deg,#3d1452,#6b2c7a 60%,#42145a);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:0;overflow:hidden;box-shadow:var(--shadow);min-height:140px;display:flex;align-items:center;justify-content:center}
+.banner img{width:100%;height:100%;object-fit:cover}
+.mascote{position:absolute;right:-20px;top:-30px;width:120px;opacity:0;animation:mascoteIn 1.2s ease-out .2s forwards}
+@keyframes mascoteIn{from{transform:translate(40px,-40px) rotate(8deg) scale(.9);opacity:0}to{transform:translate(0,0) rotate(0) scale(1);opacity:1}}
+
+/* Cardápio imagem */
+.cardapio{margin-top:18px}
+.cardapio .imgbox{background:var(--bg-2);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+
+/* Carrosseis */
+.carrosseis{margin-top:18px;display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:900px){.carrosseis{grid-template-columns:1fr 1fr}}
+.carousel{background:var(--bg-2);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:10px;box-shadow:var(--shadow)}
+.carousel h3{margin:4px 8px 8px;font-size:1.05rem;color:var(--muted)}
+.track{display:flex;overflow-x:auto;gap:10px;scroll-snap-type:x mandatory;padding:8px}
+.item{min-width:220px;background:#1f0b2d;border:1px solid rgba(255,255,255,.08);border-radius:14px;scroll-snap-align:start}
+.item img{width:100%;height:140px;object-fit:cover;border-bottom:1px solid rgba(255,255,255,.06)}
+.item .info{padding:10px}
+.ctrl{display:flex;justify-content:space-between;gap:8px;margin:4px 8px}
+.ctrl button{background:rgba(255,255,255,.12);border:0;padding:8px 10px;border-radius:10px;color:var(--text);cursor:pointer}
+
+/* Botões de categorias (com figurinha/imagem) */
+.badges{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
+@media(min-width:720px){.badges{grid-template-columns:repeat(5,1fr)}}
+.badge{display:flex;align-items:center;gap:8px;background:var(--bg-2);border:1px solid rgba(255,255,255,.1);padding:10px;border-radius:999px;box-shadow:var(--shadow);font-weight:600;justify-content:center}
+.badge img{width:22px;height:22px;border-radius:6px}
+
+/* Seções alvo p/ busca */
+section{scroll-margin-top:90px}
+
+/* Modal genérico */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:60}
+.dialog{background:var(--bg-2);color:var(--text);width:min(520px,92vw);border-radius:16px;border:1px solid rgba(255,255,255,.1);box-shadow:var(--shadow)}
+.dialog header{position:relative;background:transparent;border:0}
+.dialog .content{padding:16px}
+.dialog .actions{display:flex;gap:10px;justify-content:flex-end;padding:12px 16px}
+.dialog .close{position:absolute;right:10px;top:10px;background:transparent;border:0;color:#fff;font-size:18px;cursor:pointer}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.field input{background:#1f0b2d;border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:12px;padding:10px}
+.primary{background:#fff;color:#1d0f25;border:0;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer}
+.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:10px 14px;cursor:pointer}
+.hint{color:var(--muted);font-size:.9rem}
+
+footer{margin:60px 0 40px;color:#9b7fb6;text-align:center}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container row">
+      <!-- LOGO + MENU (clique para abrir) -->
+      <div id="logoBtn" class="logo" aria-haspopup="true" aria-expanded="false">
+        <img src="assets/logo.png" alt="Logo Gelado Açaíteria"/>
+        <strong>Gelado Açaíteria</strong>
+      </div>
+      <nav id="logoMenu" class="menu" aria-label="Menu da logo">
+        <a href="#" id="openLogin">🔐 Login</a>
+        <a href="#meus-pedidos">🧾 Meus pedidos</a>
+        <a href="#cardapio">🧉 Menu</a>
+      </nav><div class="pill" title="Localização">
+    📍 <span id="local">Nova Brasília | Campos dos Goytacazes</span>
+  </div>
+
+  <div class="space"></div>
+
+  <!-- Busca -->
+  <form id="searchForm" class="search" role="search" aria-label="Buscar no site">
+    <input id="q" name="q" type="search" placeholder="Pesquisar..." aria-label="Pesquisar"/>
+    <button type="submit" title="Buscar">🔎</button>
+  </form>
+
+  <button id="loginBtn" class="login-btn">FAZER LOGIN</button>
+</div>
+
+  </header>  <main class="container">
+    <!-- HERO: Banner (imagem) + Mascote separado com animação -->
+    <section class="hero" id="hero">
+      <!-- Substitua o src abaixo pelo PNG/JPG exportado do Canva do banner retangular -->
+      <div class="banner" aria-label="Banner principal">
+        <img src="assets/banner-card-hero.jpg" alt="Banner principal"/>
+      </div>
+      <!-- Mascote/Boneco em arquivo separado para animação de entrada -->
+      <img class="mascote" src="assets/mascote.png" alt="Mascote chegando"/>
+    </section><!-- CARDÁPIO (imagem única do Canva) -->
+<section id="cardapio" class="cardapio" data-tags="cardapio menu combos família familia">
+  <div class="imgbox">
+    <!-- Substitua pelo PNG/JPG exportado do Canva do bloco "CARDÁPIO" -->
+    <img src="assets/cardapio.jpg" alt="Imagem do cardápio"/>
+  </div>
+</section>
+
+<!-- CARROSSEIS (4 carrosseis independentes) -->
+<section class="carrosseis">
+  <article class="carousel" id="mais-pedidos" data-tags="mais pedidos populares acai tradicional">
+    <div class="ctrl">
+      <h3>🍧 Mais Pedidos</h3>
+      <div class="space"></div>
+      <button data-left>⟵</button>
+      <button data-right>⟶</button>
+    </div>
+    <div class="track">
+      <div class="item" data-tags="acai tradicional">
+        <img src="assets/prod1.jpg" alt="Açaí 500ml"/>
+        <div class="info"><strong>Açaí 500 ml</strong><div class="hint">Granola + Banana</div></div>
+      </div>
+      <div class="item" data-tags="copos sobremesa">
+        <img src="assets/prod2.jpg" alt="Copo da Felicidade"/>
+        <div class="info"><strong>Copo da Felicidade</strong><div class="hint">Nutella + Morango</div></div>
+      </div>
+      <div class="item" data-tags="milk shake">
+        <img src="assets/prod3.jpg" alt="Milk shake de açaí"/>
+        <div class="info"><strong>Milk shake de Açaí</strong><div class="hint">500 ml</div></div>
+      </div>
+      <div class="item" data-tags="combo familia">
+        <img src="assets/prod4.jpg" alt="Combo Família"/>
+        <div class="info"><strong>Combo Família</strong><div class="hint">3 copos 500 ml</div></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="carousel" id="compre-leve" data-tags="promoção compre 1 leve 2">
+    <div class="ctrl">
+      <h3>🎁 Promo: Compre 1, leve 2</h3>
+      <div class="space"></div>
+      <button data-left>⟵</button>
+      <button data-right>⟶</button>
+    </div>
+    <div class="track">
+      <div class="item" data-tags="promo morango">
+        <img src="assets/promo1.jpg" alt="Promo Morango"/>
+        <div class="info"><strong>Duo Morango</strong><div class="hint">Leve 2 por 1</div></div>
+      </div>
+      <div class="item" data-tags="promo nutella">
+        <img src="assets/promo2.jpg" alt="Promo Nutella"/>
+        <div class="info"><strong>Duo Nutella</strong><div class="hint">Leve 2 por 1</div></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="carousel" id="monte-seu" data-tags="monte seu acai personalizado toppings">
+    <div class="ctrl">
+      <h3>🧪 Monte seu açaí</h3>
+      <div class="space"></div>
+      <button data-left>⟵</button>
+      <button data-right>⟶</button>
+    </div>
+    <div class="track">
+      <div class="item" data-tags="topping granola">
+        <img src="assets/topping1.jpg" alt="Granola"/>
+        <div class="info"><strong>Granola Crocante</strong><div class="hint">Adicional</div></div>
+      </div>
+      <div class="item" data-tags="topping leite ninho">
+        <img src="assets/topping2.jpg" alt="Leite Ninho"/>
+        <div class="info"><strong>Leite Ninho</strong><div class="hint">Adicional</div></div>
+      </div>
+      <div class="item" data-tags="topping paçoca">
+        <img src="assets/topping3.jpg" alt="Paçoca"/>
+        <div class="info"><strong>Paçoca</strong><div class="hint">Adicional</div></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="carousel" id="milk-shake" data-tags="milk shake milkshake bebidas">
+    <div class="ctrl">
+      <h3>🥤 Milk shake</h3>
+      <div class="space"></div>
+      <button data-left>⟵</button>
+      <button data-right>⟶</button>
+    </div>
+    <div class="track">
+      <div class="item" data-tags="milk shake chocolate">
+        <img src="assets/milk1.jpg" alt="Milk shake chocolate"/>
+        <div class="info"><strong>Chocolate</strong><div class="hint">500 ml</div></div>
+      </div>
+      <div class="item" data-tags="milk shake morango">
+        <img src="assets/milk2.jpg" alt="Milk shake morango"/>
+        <div class="info"><strong>Morango</strong><div class="hint">500 ml</div></div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- BOTÕES DE ATALHO (com figurinha imagem) -->
+<section class="badges" aria-label="Atalhos">
+  <a class="badge" href="#mais-pedidos"><img src="assets/ico-mais.png" alt=""/> Mais Pedidos</a>
+  <a class="badge" href="#compre-leve"><img src="assets/ico-promo.png" alt=""/> Compre 1 e leve 2</a>
+  <a class="badge" href="#monte-seu"><img src="assets/ico-monte.png" alt=""/> Monte seu açaí</a>
+  <a class="badge" href="#milk-shake"><img src="assets/ico-combos.png" alt=""/> Combos Deliciosos</a>
+  <a class="badge" href="#milk-shake"><img src="assets/ico-milk.png" alt=""/> Milk shake</a>
+</section>
+
+<!-- Seção placeholder para "Meus pedidos" -->
+<section id="meus-pedidos" style="margin-top:28px">
+  <h2 style="margin:0 0 10px">Meus pedidos</h2>
+  <p class="hint">(Área futura: listar pedidos do usuário após login.)</p>
+</section>
+
+  </main>  <footer class="container">
+    © <span id="year"></span> Gelado Açaíteria — Todos os direitos reservados.
+  </footer>  <!-- MODAL: Login + verificação via WhatsApp (modo demo) -->  <div id="loginModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <div class="dialog">
+      <header class="row" style="padding:12px 16px">
+        <h3 id="loginTitle">Entrar</h3>
+        <button class="close" data-close>✕</button>
+      </header>
+      <div class="content">
+        <div class="field">
+          <label for="nome">Seu nome</label>
+          <input id="nome" maxlength="40" placeholder="Maria, João…"/>
+        </div>
+        <div class="field">
+          <label for="fone">Telefone (WhatsApp)</label>
+          <input id="fone" inputmode="tel" placeholder="(22) 9 9999-9999"/>
+        </div>
+        <div class="row" style="gap:8px;flex-wrap:wrap">
+          <button id="enviarOtp" class="primary">Verificar celular pelo WhatsApp</button>
+          <span class="hint">Modo demonstração: geramos um código de 6 dígitos no navegador.</span>
+        </div>
+        <div id="otpBox" class="field" style="display:none">
+          <label for="otp">Código recebido</label>
+          <input id="otp" inputmode="numeric" placeholder="000000" maxlength="6"/>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="ghost" data-close>Cancelar</button>
+        <button id="confirmLogin" class="primary" disabled>Confirmar</button>
+      </div>
+    </div>
+  </div>  <script>
+    // ===== Utilidades =====
+    const $ = (sel,root=document)=>root.querySelector(sel);
+    const $$ = (sel,root=document)=>Array.from(root.querySelectorAll(sel));
+
+    // Ano no rodapé
+    $('#year').textContent = new Date().getFullYear();
+
+    // ===== Menu no logo =====
+    const logoBtn = $('#logoBtn');
+    const logoMenu = $('#logoMenu');
+    const toggleMenu = (show) => { logoMenu.style.display = show? 'block':'none'; logoBtn.setAttribute('aria-expanded', show); };
+    logoBtn.addEventListener('click', (e)=>{ e.stopPropagation(); toggleMenu(logoMenu.style.display!=='block'); });
+    document.addEventListener('click', ()=> toggleMenu(false));
+
+    // ===== Busca simples: encontra primeira seção/item com tag correspondente e rola =====
+    $('#searchForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const q = ($('#q').value||'').trim().toLowerCase();
+      if(!q) return;
+      // Procura seções e itens por data-tags
+      const tagged = $$('[data-tags]');
+      const hit = tagged.find(el => (el.dataset.tags||'').toLowerCase().includes(q));
+      if(hit){
+        hit.scrollIntoView({behavior:'smooth',block:'start'});
+        // efeito de destaque rápido
+        hit.style.outline='2px solid var(--accent-2)';
+        setTimeout(()=> hit.style.outline='none', 1200);
+      } else {
+        alert('Nada encontrado para: '+q);
+      }
+    });
+
+    // ===== Carrosseis: botões deslizam o track =====
+    $$('.carousel').forEach(car =>{
+      const track = $('.track',car);
+      const left = $('[data-left]',car); const right=$('[data-right]',car);
+      const step = () => track.clientWidth * 0.9;
+      left.addEventListener('click', ()=> track.scrollBy({left:-step(), behavior:'smooth'}));
+      right.addEventListener('click', ()=> track.scrollBy({left: step(), behavior:'smooth'}));
+    });
+
+    // ===== Modal generics =====
+    const modal = $('#loginModal');
+    const openModal = ()=> modal.style.display='flex';
+    const closeModal = ()=> modal.style.display='none';
+    $('#loginBtn').addEventListener('click', openModal);
+    $('#openLogin').addEventListener('click', (e)=>{ e.preventDefault(); openModal(); toggleMenu(false); });
+    $$('[data-close]').forEach(b=> b.addEventListener('click', closeModal));
+
+    // ===== Login + verificação (DEMO) =====
+    let otpCode = null;
+    const validarCampos = ()=>{
+      const nome = $('#nome').value.trim();
+      const fone = $('#fone').value.replace(/\D/g,'');
+      const ok = nome.length>=2 && fone.length>=10 && $('#otp').value.length===6;
+      $('#confirmLogin').disabled = !ok;
+    }
+    ['input','keyup'].forEach(evt=>{
+      $('#nome').addEventListener(evt, validarCampos);
+      $('#fone').addEventListener(evt, validarCampos);
+      $('#otp').addEventListener(evt, validarCampos);
+    });
+
+    // Gera código e abre WhatsApp (modo demo)
+    $('#enviarOtp').addEventListener('click', ()=>{
+      const fone = $('#fone').value.replace(/\D/g,'');
+      if(fone.length<10){ alert('Informe um telefone válido.'); return; }
+      otpCode = String(Math.floor(100000 + Math.random()*900000));
+      $('#otpBox').style.display='block';
+      // Abrir WhatsApp com mensagem pré-preenchida (o usuário envia/recebe no próprio número).
+      // Observação: sem backend/API oficial, não há como enviar automaticamente.
+      // Esta ação abre o WhatsApp para o próprio número informado (auto-chat) com o código.
+      const msg = encodeURIComponent('Seu código de verificação Gelado Açaíteria: '+otpCode);
+      const url = 'https://wa.me/'+fone+'?text='+msg;
+      window.open(url,'_blank');
+    });
+
+    // Confirmar: valida OTP
+    $('#confirmLogin').addEventListener('click', ()=>{
+      const nome = $('#nome').value.trim();
+      if(!otpCode){ alert('Clique em "Verificar celular" para receber o código.'); return; }
+      if($('#otp').value !== otpCode){ alert('Código incorreto.'); return; }
+      closeModal();
+      $('#loginBtn').textContent = 'Olá, '+nome.split(' ')[0];
+      alert('Login confirmado! Bem-vindo(a), '+nome+'!');
+    });
+
+    // ===== Acessibilidade: fechar modal com ESC =====
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+
+    // ===== Observações de integração (em comentários no código):
+    // Para envio real do OTP via WhatsApp:
+    // 1) Crie um backend (Cloudflare Workers, Netlify Functions ou qualquer Node/Go/Python).
+    // 2) Integre com a API do WhatsApp Business (Meta Cloud API) ou Twilio WhatsApp.
+    // 3) No clique de #enviarOtp, faça fetch() para seu endpoint /send-otp {phone}. O backend
+    //    gera o OTP, envia pelo WhatsApp e retorna um token/nonce. Salve no localStorage.
+    // 4) No #confirmLogin, valide o OTP chamando /verify-otp.
+    // 5) Troque o alert/label do botão por UI amigável (loading, erros, etc.).
+  </script></body>
+</html>
