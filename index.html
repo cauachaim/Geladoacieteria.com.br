@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gelado Açaíteria</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS externo -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- HEADER -->
   <header>
     <div class="container row">
       <!-- LOGO -->
@@ -18,22 +24,23 @@
 
       <!-- Localização -->
       <div class="loc-pill" title="Localização">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7z" fill="#07414f"/>
-          <circle cx="12" cy="9" r="2.2" fill="#0b4b57"/>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7z" fill="#07414f" />
+          <circle cx="12" cy="9" r="2.2" fill="#0b4b57" />
         </svg>
-        <div>Nova Brasília | Campos dos Goytacazes</div>
+        <div style="font-size:.95rem">Nova Brasília | Campos dos Goytacazes</div>
       </div>
 
       <div class="space"></div>
 
-      <!-- Busca + Login -->
-      <div class="search">
+      <!-- Ícone de busca -->
+      <div class="search" role="search" aria-label="Buscar no site">
         <button id="searchOpen" class="search-btn" title="Pesquisar">🔎</button>
       </div>
+
       <button id="loginBtn" class="login-btn">FAZER LOGIN</button>
 
-      <!-- menu dropdown do logo -->
+      <!-- Menu dropdown -->
       <nav id="logoMenu" class="menu" aria-label="Menu da logo">
         <a href="#" id="openLogin">🔐 Login</a>
         <a href="#meus-pedidos">🧾 Meus pedidos</a>
@@ -44,25 +51,21 @@
 
   <main class="container">
     <!-- HERO -->
-    <section class="hero">
-      <div class="banner">
-        <img src="assets/banner.png" alt="Banner Gelado Açaíteria" class="banner-img"/>
-        <img src="assets/mascote.png" alt="Mascote" class="mascote"/>
+    <section class="hero" id="hero">
+      <div class="banner" aria-label="Banner principal">
+        <img src="assets/banner-card-hero.jpg" alt="Banner principal"/>
+      </div>
+      <img id="mascote" class="mascote" src="assets/mascote.png" alt="Mascote chegando"/>
+    </section>
+
+    <!-- CARDÁPIO -->
+    <section id="cardapio" class="cardapio" data-tags="cardapio menu combos família familia">
+      <div class="imgbox">
+        <img src="assets/cardapio.jpg" alt="Imagem do cardápio"/>
       </div>
     </section>
 
-    <!-- Info abaixo do banner -->
-    <section class="delivery-info">
-      <div class="chip">ENTREGA 40 MIN–1H E 10 MIN</div>
-      <div class="chip">SEM PEDIDO MÍNIMO</div>
-    </section>
-
-    <!-- Título CARDÁPIO -->
-    <div class="title-pill" id="cardapio">
-      <img src="assets/cardapio.png" alt="Cardápio"/>
-    </div>
-
-    <!-- FOTO-CARROSSEL -->
+    <!-- CARROSSEL -->
     <section class="photo-carousel" aria-label="Galeria de fotos">
       <div class="slides" id="slides">
         <div class="slide"><img src="assets/slide1.jpg" alt="Foto 1"/></div>
@@ -77,8 +80,8 @@
       <div class="dots" id="dots"></div>
     </section>
 
-    <!-- Atalhos -->
-    <section class="badges">
+    <!-- BADGES -->
+    <section class="badges" aria-label="Atalhos">
       <a class="badge" href="#mais-pedidos"><img src="assets/ico-mais.png" alt=""/> Mais Pedidos</a>
       <a class="badge" href="#promo"><img src="assets/ico-promo.png" alt=""/> Compre 1 e leve 2</a>
       <a class="badge" href="#monte-seu"><img src="assets/ico-monte.png" alt=""/> Monte seu açaí</a>
@@ -86,9 +89,9 @@
       <a class="badge" href="#milk-shake"><img src="assets/ico-milk.png" alt=""/> Milk shake</a>
     </section>
 
-    <!-- Placeholder "Meus pedidos" -->
-    <section id="meus-pedidos">
-      <h2>Meus pedidos</h2>
+    <!-- Meus pedidos -->
+    <section id="meus-pedidos" style="margin-top:28px">
+      <h2 style="margin:0 0 10px">Meus pedidos</h2>
       <p class="hint">(Área futura: listar pedidos do usuário após login.)</p>
     </section>
   </main>
@@ -97,10 +100,10 @@
     © <span id="year"></span> Gelado Açaíteria — Todos os direitos reservados.
   </footer>
 
-  <!-- MODAL: Login DEMO -->
+  <!-- MODAL LOGIN -->
   <div id="loginModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
     <div class="dialog">
-      <header class="row">
+      <header class="row" style="padding:12px 16px">
         <h3 id="loginTitle">Entrar</h3>
         <button class="close" data-close>✕</button>
       </header>
@@ -113,7 +116,10 @@
           <label for="fone">Telefone (WhatsApp)</label>
           <input id="fone" inputmode="tel" placeholder="(22) 9 9999-9999"/>
         </div>
-        <button id="enviarOtp" class="primary">Verificar celular pelo WhatsApp</button>
+        <div class="row" style="gap:8px;flex-wrap:wrap">
+          <button id="enviarOtp" class="primary">Verificar celular pelo WhatsApp</button>
+          <span class="hint">Modo demonstração: geramos um código de 6 dígitos no navegador.</span>
+        </div>
         <div id="otpBox" class="field" style="display:none">
           <label for="otp">Código recebido</label>
           <input id="otp" inputmode="numeric" placeholder="000000" maxlength="6"/>
@@ -126,6 +132,7 @@
     </div>
   </div>
 
+  <!-- JS externo -->
   <script src="script.js"></script>
 </body>
 </html>
