@@ -23,57 +23,71 @@
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%}
     .container{max-width:1100px;margin:0 auto;padding:14px}/* Header */
-header{position:sticky;top:0;z-index:50;background:rgba(13,4,19,.75);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+header{position:sticky;top:0;z-index:50;background:rgba(13,4,19,.65);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.04)}
 .row{display:flex;align-items:center;gap:10px}
 .space{flex:1}
-.logo{display:flex;align-items:center;gap:10px;border-radius:999px;padding:8px 12px;transition:.2s;cursor:pointer}
-.logo:hover{background:rgba(255,255,255,.06)}
-.logo img{width:38px;height:38px;border-radius:999px}
 
-.pill{display:inline-flex;align-items:center;gap:8px;background:var(--pill);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.08);font-weight:500;box-shadow:var(--shadow)}
+/* logo */
+.logo{display:flex;align-items:center;gap:10px;border-radius:999px;padding:6px;transition:.15s;cursor:pointer}
+.logo img{width:40px;height:40px;border-radius:999px}
+.logo strong{font-size:0.95rem}
+
+/* localização - adaptado para o que você enviou (retângulo claro) */
+.loc-pill{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(180deg,#e6fbff 0%, #d6f6ff 100%);color:#09202b;padding:8px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.06);font-weight:600;box-shadow:0 6px 18px rgba(9,32,43,.06)}
+.loc-pill svg{width:18px;height:18px;flex-shrink:0}
+
+/* search icon (circular) */
+.search-btn{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.05);cursor:pointer}
+
+/* busca principal (apenas ícone top-right conforme imagem) */
 .search{position:relative}
-.search input{width:220px;background:var(--pill);border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:10px 36px 10px 14px;color:var(--text)}
-.search button{position:absolute;right:4px;top:4px;border:0;background:transparent;color:var(--text);padding:6px;border-radius:999px;cursor:pointer}
+.search input{display:none}
 
-.login-btn{background:#fff;color:#1d0f25;font-weight:700;border:0;border-radius:999px;padding:10px 14px;cursor:pointer}
+.login-btn{background:#fff;color:#1d0f25;font-weight:800;border:0;border-radius:999px;padding:8px 14px;cursor:pointer}
 
-/* Dropdown no logo */
-.menu{position:absolute;top:60px;left:14px;background:var(--bg-2);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;display:none;min-width:220px}
-.menu a{display:flex;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.06)}
+/* dropdown menu da logo */
+.menu{position:absolute;top:66px;left:14px;background:var(--bg-2);border:1px solid rgba(255,255,255,.06);border-radius:12px;box-shadow:var(--shadow);overflow:hidden;display:none;min-width:220px}
+.menu a{display:flex;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.04)}
 .menu a:last-child{border-bottom:none}
-.menu a:hover{background:rgba(255,255,255,.06)}
+.menu a:hover{background:rgba(255,255,255,.03)}
 
-/* Hero / Banner */
+/* HERO / Banner */
 .hero{position:relative;margin-top:14px}
-.banner{background:linear-gradient(120deg,#3d1452,#6b2c7a 60%,#42145a);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:0;overflow:hidden;box-shadow:var(--shadow);min-height:140px;display:flex;align-items:center;justify-content:center}
-.banner img{width:100%;height:100%;object-fit:cover}
-.mascote{position:absolute;right:-20px;top:-30px;width:120px;opacity:0;animation:mascoteIn 1.2s ease-out .2s forwards}
-@keyframes mascoteIn{from{transform:translate(40px,-40px) rotate(8deg) scale(.9);opacity:0}to{transform:translate(0,0) rotate(0) scale(1);opacity:1}}
+.banner{background:linear-gradient(120deg,#3d1452,#6b2c7a 60%,#42145a);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:0;overflow:hidden;box-shadow:var(--shadow);min-height:170px;display:block}
+.banner img{width:100%;height:100%;object-fit:cover;display:block}
 
-/* Cardápio imagem */
+/* Mascote: inicia vindo do canto superior direito e chega na posição que aparece na sua imagem
+   Depois de chegar, começa um leve movimento (flutuar). */
+.mascote{position:absolute;left:clamp(20px,6vw,64px);top:clamp(-36px,-3vh,-12px);width:140px;pointer-events:none;opacity:0;transform-origin:center}
+.mascote.flyIn{animation:flyIn 900ms cubic-bezier(.22,.9,.32,1) .15s forwards}
+.mascote.float{animation:float 3000ms ease-in-out 600ms infinite alternate}
+@keyframes flyIn{
+  from{transform:translate(60vw,-40vh) rotate(14deg) scale(.96);opacity:0}
+  to{transform:translate(0,0) rotate(0) scale(1);opacity:1}
+}
+@keyframes float{from{transform:translateY(0);}to{transform:translateY(-10px);}}
+
+/* Cardápio */
 .cardapio{margin-top:18px}
 .cardapio .imgbox{background:var(--bg-2);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.cardapio img{width:100%;height:auto;display:block}
 
-/* Carrosseis */
-.carrosseis{margin-top:18px;display:grid;grid-template-columns:1fr;gap:16px}
-@media(min-width:900px){.carrosseis{grid-template-columns:1fr 1fr}}
-.carousel{background:var(--bg-2);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:10px;box-shadow:var(--shadow)}
-.carousel h3{margin:4px 8px 8px;font-size:1.05rem;color:var(--muted)}
-.track{display:flex;overflow-x:auto;gap:10px;scroll-snap-type:x mandatory;padding:8px}
-.item{min-width:220px;background:#1f0b2d;border:1px solid rgba(255,255,255,.08);border-radius:14px;scroll-snap-align:start}
-.item img{width:100%;height:140px;object-fit:cover;border-bottom:1px solid rgba(255,255,255,.06)}
-.item .info{padding:10px}
-.ctrl{display:flex;justify-content:space-between;gap:8px;margin:4px 8px}
-.ctrl button{background:rgba(255,255,255,.12);border:0;padding:8px 10px;border-radius:10px;color:var(--text);cursor:pointer}
+/* FOTO-CARROSSEL ÚNICO (coleção de fotos atraentes) */
+.photo-carousel{margin-top:18px;position:relative;border-radius:16px;overflow:hidden}
+.slides{display:flex;transition:transform .5s ease;will-change:transform}
+.slide{min-width:100%;flex:0 0 100%;user-select:none}
+.slide img{width:100%;height:260px;object-fit:cover;display:block}
+.carousel-ctrl{position:absolute;top:50%;left:0;right:0;display:flex;justify-content:space-between;transform:translateY(-50%);padding:0 8px;pointer-events:none}
+.carousel-ctrl button{pointer-events:auto;background:rgba(0,0,0,.36);border:0;padding:8px 10px;border-radius:10px;color:#fff;cursor:pointer}
+.dots{display:flex;gap:8px;justify-content:center;padding:10px;margin-top:8px}
+.dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.15);cursor:pointer}
+.dot.active{background:var(--accent-2)}
 
-/* Botões de categorias (com figurinha/imagem) */
+/* Badges de atalhos (com figurinha imagem) */
 .badges{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
 @media(min-width:720px){.badges{grid-template-columns:repeat(5,1fr)}}
-.badge{display:flex;align-items:center;gap:8px;background:var(--bg-2);border:1px solid rgba(255,255,255,.1);padding:10px;border-radius:999px;box-shadow:var(--shadow);font-weight:600;justify-content:center}
-.badge img{width:22px;height:22px;border-radius:6px}
-
-/* Seções alvo p/ busca */
-section{scroll-margin-top:90px}
+.badge{display:flex;align-items:center;gap:8px;background:var(--bg-2);border:1px solid rgba(255,255,255,.07);padding:10px;border-radius:999px;box-shadow:var(--shadow);font-weight:700;justify-content:center;color:var(--muted)}
+.badge img{width:26px;height:26px;border-radius:6px}
 
 /* Modal genérico */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:60}
@@ -90,33 +104,59 @@ section{scroll-margin-top:90px}
 
 footer{margin:60px 0 40px;color:#9b7fb6;text-align:center}
 
+/* RESPONSIVO */
+@media(max-width:900px){
+  .banner{min-height:180px}
+  .slide img{height:220px}
+  .mascote{width:110px}
+}
+@media(max-width:720px){
+  .container{padding:10px}
+  header .container{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .loc-pill{order:2;margin-left:6px}
+  .logo{order:1}
+  .search{order:3}
+  .login-btn{order:4}
+  .banner{min-height:150px}
+  .slide img{height:180px}
+  .mascote{left:12px;top:-28px;width:96px}
+  .badge{font-size:.9rem}
+}
+
   </style>
 </head>
 <body>
   <header>
     <div class="container row">
-      <!-- LOGO + MENU (clique para abrir) -->
+      <!-- LOGO -->
       <div id="logoBtn" class="logo" aria-haspopup="true" aria-expanded="false">
-        <img src="assets/logo.png" alt="Logo Gelado Açaíteria"/>
+        <img src="assets/logo.png" alt="Logo"/>
         <strong>Gelado Açaíteria</strong>
-      </div>
-      <nav id="logoMenu" class="menu" aria-label="Menu da logo">
-        <a href="#" id="openLogin">🔐 Login</a>
-        <a href="#meus-pedidos">🧾 Meus pedidos</a>
-        <a href="#cardapio">🧉 Menu</a>
-      </nav><div class="pill" title="Localização">
-    📍 <span id="local">Nova Brasília | Campos dos Goytacazes</span>
+      </div><!-- Localização (estilo conforme imagem que você enviou) -->
+  <div class="loc-pill" title="Localização">
+    <!-- ícone de localização (simples SVG) -->
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7z" fill="#07414f" />
+      <circle cx="12" cy="9" r="2.2" fill="#0b4b57" />
+    </svg>
+    <div style="font-size:.95rem">Nova Brasília | Campos dos Goytacazes</div>
   </div>
 
   <div class="space"></div>
 
-  <!-- Busca -->
-  <form id="searchForm" class="search" role="search" aria-label="Buscar no site">
-    <input id="q" name="q" type="search" placeholder="Pesquisar..." aria-label="Pesquisar"/>
-    <button type="submit" title="Buscar">🔎</button>
-  </form>
+  <!-- Ícone de busca (círculo) -->
+  <div class="search" role="search" aria-label="Buscar no site">
+    <button id="searchOpen" class="search-btn" title="Pesquisar">🔎</button>
+  </div>
 
   <button id="loginBtn" class="login-btn">FAZER LOGIN</button>
+
+  <!-- menu dropdown do logo -->
+  <nav id="logoMenu" class="menu" aria-label="Menu da logo">
+    <a href="#" id="openLogin">🔐 Login</a>
+    <a href="#meus-pedidos">🧾 Meus pedidos</a>
+    <a href="#cardapio">🧉 Menu</a>
+  </nav>
 </div>
 
   </header>  <main class="container">
@@ -125,10 +165,11 @@ footer{margin:60px 0 40px;color:#9b7fb6;text-align:center}
       <!-- Substitua o src abaixo pelo PNG/JPG exportado do Canva do banner retangular -->
       <div class="banner" aria-label="Banner principal">
         <img src="assets/banner-card-hero.jpg" alt="Banner principal"/>
-      </div>
-      <!-- Mascote/Boneco em arquivo separado para animação de entrada -->
-      <img class="mascote" src="assets/mascote.png" alt="Mascote chegando"/>
-    </section><!-- CARDÁPIO (imagem única do Canva) -->
+      </div><!-- Mascote/Boneco em arquivo separado para animação de entrada (vai vir do canto superior direito e chegar à posição mostrada na imagem) -->
+  <img id="mascote" class="mascote" src="assets/mascote.png" alt="Mascote chegando"/>
+</section>
+
+<!-- CARDÁPIO (imagem única do Canva) -->
 <section id="cardapio" class="cardapio" data-tags="cardapio menu combos família familia">
   <div class="imgbox">
     <!-- Substitua pelo PNG/JPG exportado do Canva do bloco "CARDÁPIO" -->
@@ -136,103 +177,27 @@ footer{margin:60px 0 40px;color:#9b7fb6;text-align:center}
   </div>
 </section>
 
-<!-- CARROSSEIS (4 carrosseis independentes) -->
-<section class="carrosseis">
-  <article class="carousel" id="mais-pedidos" data-tags="mais pedidos populares acai tradicional">
-    <div class="ctrl">
-      <h3>🍧 Mais Pedidos</h3>
-      <div class="space"></div>
-      <button data-left>⟵</button>
-      <button data-right>⟶</button>
-    </div>
-    <div class="track">
-      <div class="item" data-tags="acai tradicional">
-        <img src="assets/prod1.jpg" alt="Açaí 500ml"/>
-        <div class="info"><strong>Açaí 500 ml</strong><div class="hint">Granola + Banana</div></div>
-      </div>
-      <div class="item" data-tags="copos sobremesa">
-        <img src="assets/prod2.jpg" alt="Copo da Felicidade"/>
-        <div class="info"><strong>Copo da Felicidade</strong><div class="hint">Nutella + Morango</div></div>
-      </div>
-      <div class="item" data-tags="milk shake">
-        <img src="assets/prod3.jpg" alt="Milk shake de açaí"/>
-        <div class="info"><strong>Milk shake de Açaí</strong><div class="hint">500 ml</div></div>
-      </div>
-      <div class="item" data-tags="combo familia">
-        <img src="assets/prod4.jpg" alt="Combo Família"/>
-        <div class="info"><strong>Combo Família</strong><div class="hint">3 copos 500 ml</div></div>
-      </div>
-    </div>
-  </article>
-
-  <article class="carousel" id="compre-leve" data-tags="promoção compre 1 leve 2">
-    <div class="ctrl">
-      <h3>🎁 Promo: Compre 1, leve 2</h3>
-      <div class="space"></div>
-      <button data-left>⟵</button>
-      <button data-right>⟶</button>
-    </div>
-    <div class="track">
-      <div class="item" data-tags="promo morango">
-        <img src="assets/promo1.jpg" alt="Promo Morango"/>
-        <div class="info"><strong>Duo Morango</strong><div class="hint">Leve 2 por 1</div></div>
-      </div>
-      <div class="item" data-tags="promo nutella">
-        <img src="assets/promo2.jpg" alt="Promo Nutella"/>
-        <div class="info"><strong>Duo Nutella</strong><div class="hint">Leve 2 por 1</div></div>
-      </div>
-    </div>
-  </article>
-
-  <article class="carousel" id="monte-seu" data-tags="monte seu acai personalizado toppings">
-    <div class="ctrl">
-      <h3>🧪 Monte seu açaí</h3>
-      <div class="space"></div>
-      <button data-left>⟵</button>
-      <button data-right>⟶</button>
-    </div>
-    <div class="track">
-      <div class="item" data-tags="topping granola">
-        <img src="assets/topping1.jpg" alt="Granola"/>
-        <div class="info"><strong>Granola Crocante</strong><div class="hint">Adicional</div></div>
-      </div>
-      <div class="item" data-tags="topping leite ninho">
-        <img src="assets/topping2.jpg" alt="Leite Ninho"/>
-        <div class="info"><strong>Leite Ninho</strong><div class="hint">Adicional</div></div>
-      </div>
-      <div class="item" data-tags="topping paçoca">
-        <img src="assets/topping3.jpg" alt="Paçoca"/>
-        <div class="info"><strong>Paçoca</strong><div class="hint">Adicional</div></div>
-      </div>
-    </div>
-  </article>
-
-  <article class="carousel" id="milk-shake" data-tags="milk shake milkshake bebidas">
-    <div class="ctrl">
-      <h3>🥤 Milk shake</h3>
-      <div class="space"></div>
-      <button data-left>⟵</button>
-      <button data-right>⟶</button>
-    </div>
-    <div class="track">
-      <div class="item" data-tags="milk shake chocolate">
-        <img src="assets/milk1.jpg" alt="Milk shake chocolate"/>
-        <div class="info"><strong>Chocolate</strong><div class="hint">500 ml</div></div>
-      </div>
-      <div class="item" data-tags="milk shake morango">
-        <img src="assets/milk2.jpg" alt="Milk shake morango"/>
-        <div class="info"><strong>Morango</strong><div class="hint">500 ml</div></div>
-      </div>
-    </div>
-  </article>
+<!-- FOTO-CARROSSEL ÚNICO: apenas fotos atraentes, 4 imagens por padrão -->
+<section class="photo-carousel" aria-label="Galeria de fotos">
+  <div class="slides" id="slides">
+    <div class="slide"><img src="assets/slide1.jpg" alt="Foto 1"/></div>
+    <div class="slide"><img src="assets/slide2.jpg" alt="Foto 2"/></div>
+    <div class="slide"><img src="assets/slide3.jpg" alt="Foto 3"/></div>
+    <div class="slide"><img src="assets/slide4.jpg" alt="Foto 4"/></div>
+  </div>
+  <div class="carousel-ctrl">
+    <button id="prev">⟵</button>
+    <button id="next">⟶</button>
+  </div>
+  <div class="dots" id="dots"></div>
 </section>
 
 <!-- BOTÕES DE ATALHO (com figurinha imagem) -->
 <section class="badges" aria-label="Atalhos">
   <a class="badge" href="#mais-pedidos"><img src="assets/ico-mais.png" alt=""/> Mais Pedidos</a>
-  <a class="badge" href="#compre-leve"><img src="assets/ico-promo.png" alt=""/> Compre 1 e leve 2</a>
+  <a class="badge" href="#promo"><img src="assets/ico-promo.png" alt=""/> Compre 1 e leve 2</a>
   <a class="badge" href="#monte-seu"><img src="assets/ico-monte.png" alt=""/> Monte seu açaí</a>
-  <a class="badge" href="#milk-shake"><img src="assets/ico-combos.png" alt=""/> Combos Deliciosos</a>
+  <a class="badge" href="#combos"><img src="assets/ico-combos.png" alt=""/> Combos Deliciosos</a>
   <a class="badge" href="#milk-shake"><img src="assets/ico-milk.png" alt=""/> Milk shake</a>
 </section>
 
@@ -278,6 +243,9 @@ footer{margin:60px 0 40px;color:#9b7fb6;text-align:center}
     const $ = (sel,root=document)=>root.querySelector(sel);
     const $$ = (sel,root=document)=>Array.from(root.querySelectorAll(sel));
 
+    // função leve para remover tudo que não for dígito (evita usar literais com barra no código)
+    const stripNumbers = s => (s||'').split('').filter(c => '0123456789'.includes(c)).join('');
+
     // Ano no rodapé
     $('#year').textContent = new Date().getFullYear();
 
@@ -288,31 +256,57 @@ footer{margin:60px 0 40px;color:#9b7fb6;text-align:center}
     logoBtn.addEventListener('click', (e)=>{ e.stopPropagation(); toggleMenu(logoMenu.style.display!=='block'); });
     document.addEventListener('click', ()=> toggleMenu(false));
 
-    // ===== Busca simples: encontra primeira seção/item com tag correspondente e rola =====
-    $('#searchForm').addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const q = ($('#q').value||'').trim().toLowerCase();
-      if(!q) return;
-      // Procura seções e itens por data-tags
-      const tagged = $$('[data-tags]');
-      const hit = tagged.find(el => (el.dataset.tags||'').toLowerCase().includes(q));
-      if(hit){
-        hit.scrollIntoView({behavior:'smooth',block:'start'});
-        // efeito de destaque rápido
-        hit.style.outline='2px solid var(--accent-2)';
-        setTimeout(()=> hit.style.outline='none', 1200);
-      } else {
-        alert('Nada encontrado para: '+q);
-      }
+    // ===== Mascote: aplica animação de chegada e depois passa a flutuar =====
+    const masc = document.getElementById('mascote');
+    masc.classList.add('flyIn');
+    masc.addEventListener('animationend', (ev)=>{
+      if(ev.animationName === 'flyIn') masc.classList.add('float');
     });
 
-    // ===== Carrosseis: botões deslizam o track =====
-    $$('.carousel').forEach(car =>{
-      const track = $('.track',car);
-      const left = $('[data-left]',car); const right=$('[data-right]',car);
-      const step = () => track.clientWidth * 0.9;
-      left.addEventListener('click', ()=> track.scrollBy({left:-step(), behavior:'smooth'}));
-      right.addEventListener('click', ()=> track.scrollBy({left: step(), behavior:'smooth'}));
+    // ===== Foto-carousel (único) =====
+    const slides = $('#slides');
+    const slideEls = $$('.slide', slides);
+    const dotsWrap = $('#dots');
+    let idx = 0;
+    const total = slideEls.length;
+
+    function renderDots(){
+      dotsWrap.innerHTML = '';
+      for(let i=0;i<total;i++){
+        const d = document.createElement('div'); d.className='dot'+(i===idx? ' active':''); d.dataset.i=i;
+        d.addEventListener('click', ()=> goTo(i));
+        dotsWrap.appendChild(d);
+      }
+    }
+    function update(){
+      slides.style.transform = `translateX(-${idx*100}%)`;
+      $$('.dot').forEach(d=>d.classList.remove('active'));
+      const active = $$('.dot')[idx]; if(active) active.classList.add('active');
+    }
+    function next(){ idx = (idx+1)%total; update(); }
+    function prev(){ idx = (idx-1+total)%total; update(); }
+    function goTo(i){ idx = i%total; update(); }
+
+    $('#next').addEventListener('click', next);
+    $('#prev').addEventListener('click', prev);
+
+    // autoplay
+    let autoplay = setInterval(next, 4000);
+    // pause on hover
+    document.querySelector('.photo-carousel').addEventListener('mouseenter', ()=> clearInterval(autoplay));
+    document.querySelector('.photo-carousel').addEventListener('mouseleave', ()=> autoplay = setInterval(next,4000));
+
+    renderDots(); update();
+
+    // ===== Busca simples: encontra primeira seção/item com tag correspondente e rola =====
+    $('#searchOpen').addEventListener('click', ()=>{
+      const q = prompt('Pesquisar (ex: milk shake):');
+      if(!q) return;
+      const ql = q.trim().toLowerCase();
+      const tagged = $$('[data-tags]');
+      const hit = tagged.find(el => (el.dataset.tags||'').toLowerCase().includes(ql));
+      if(hit){ hit.scrollIntoView({behavior:'smooth',block:'start'}); hit.style.outline='2px solid var(--accent-2)'; setTimeout(()=> hit.style.outline='none', 1200); }
+      else alert('Nada encontrado para: '+q);
     });
 
     // ===== Modal generics =====
@@ -327,8 +321,8 @@ footer{margin:60px 0 40px;color:#9b7fb6;text-align:center}
     let otpCode = null;
     const validarCampos = ()=>{
       const nome = $('#nome').value.trim();
-      const fone = $('#fone').value.replace(/\D/g,'');
-      const ok = nome.length>=2 && fone.length>=10 && $('#otp').value.length===6;
+      const fone = stripNumbers($('#fone').value);
+      const ok = nome.length>=2 && fone.length>=10 && ($('#otp').value? $('#otp').value.length===6 : false);
       $('#confirmLogin').disabled = !ok;
     }
     ['input','keyup'].forEach(evt=>{
@@ -337,21 +331,16 @@ footer{margin:60px 0 40px;color:#9b7fb6;text-align:center}
       $('#otp').addEventListener(evt, validarCampos);
     });
 
-    // Gera código e abre WhatsApp (modo demo)
     $('#enviarOtp').addEventListener('click', ()=>{
-      const fone = $('#fone').value.replace(/\D/g,'');
+      const fone = stripNumbers($('#fone').value);
       if(fone.length<10){ alert('Informe um telefone válido.'); return; }
       otpCode = String(Math.floor(100000 + Math.random()*900000));
       $('#otpBox').style.display='block';
-      // Abrir WhatsApp com mensagem pré-preenchida (o usuário envia/recebe no próprio número).
-      // Observação: sem backend/API oficial, não há como enviar automaticamente.
-      // Esta ação abre o WhatsApp para o próprio número informado (auto-chat) com o código.
       const msg = encodeURIComponent('Seu código de verificação Gelado Açaíteria: '+otpCode);
       const url = 'https://wa.me/'+fone+'?text='+msg;
       window.open(url,'_blank');
     });
 
-    // Confirmar: valida OTP
     $('#confirmLogin').addEventListener('click', ()=>{
       const nome = $('#nome').value.trim();
       if(!otpCode){ alert('Clique em "Verificar celular" para receber o código.'); return; }
@@ -361,16 +350,9 @@ footer{margin:60px 0 40px;color:#9b7fb6;text-align:center}
       alert('Login confirmado! Bem-vindo(a), '+nome+'!');
     });
 
-    // ===== Acessibilidade: fechar modal com ESC =====
+    // fechar modal com ESC
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
 
-    // ===== Observações de integração (em comentários no código):
-    // Para envio real do OTP via WhatsApp:
-    // 1) Crie um backend (Cloudflare Workers, Netlify Functions ou qualquer Node/Go/Python).
-    // 2) Integre com a API do WhatsApp Business (Meta Cloud API) ou Twilio WhatsApp.
-    // 3) No clique de #enviarOtp, faça fetch() para seu endpoint /send-otp {phone}. O backend
-    //    gera o OTP, envia pelo WhatsApp e retorna um token/nonce. Salve no localStorage.
-    // 4) No #confirmLogin, valide o OTP chamando /verify-otp.
-    // 5) Troque o alert/label do botão por UI amigável (loading, erros, etc.).
+    // Notas de integração real (API WhatsApp / backend) estão nos comentários do código do index.
   </script></body>
 </html>
